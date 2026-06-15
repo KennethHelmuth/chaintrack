@@ -73,7 +73,7 @@ In batch lookup mode, addresses are automatically categorized by their format:
 
 ## Part of the Macs-Hit CTI Toolkit
 
-Built by **Kenneth Helmuth** — [macs-hit.github.io](https://kennethhelmuth.github.io/macs-hit.github.io/) | [Medium](https://medium.com)
+Built by **Kenneth Helmuth** — [macs-hit.github.io](https://kennethhelmuth.github.io/macs-hit.github.io/) | [Medium](https://medium.com/@Real-macs_hit)
 
 ---
 
