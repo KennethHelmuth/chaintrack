@@ -13,7 +13,7 @@ use ratatui::{
     style::{Color, Modifier, Style},
     text::{Line, Span},
     widgets::{
-        Block, BorderType, Borders, Cell, List, ListItem, ListState, Paragraph, Row,
+        Block, BorderType, Borders, Cell, Clear, List, ListItem, ListState, Paragraph, Row,
         Scrollbar, ScrollbarOrientation, ScrollbarState, Table, TableState, Wrap,
     },
     Frame,
@@ -648,6 +648,9 @@ impl App {
 // ─── Drawing ─────────────────────────────────────────────────────────────────
 
 pub fn draw(f: &mut Frame, app: &App) {
+    // Clear screen first in the buffer to prevent stale character artifacts
+    f.render_widget(Clear, f.area());
+
     // Background
     let bg = Block::default().style(Style::default().bg(BG));
     f.render_widget(bg, f.area());

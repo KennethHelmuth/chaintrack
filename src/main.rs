@@ -6,7 +6,7 @@ mod ui;
 
 use anyhow::Result;
 use crossterm::{
-    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyModifiers},
+    event::{self, Event, KeyCode, KeyModifiers},
     execute,
     terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
 };
@@ -21,7 +21,7 @@ async fn main() -> Result<()> {
     // Setup terminal
     enable_raw_mode()?;
     let mut stdout = io::stdout();
-    execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
+    execute!(stdout, EnterAlternateScreen)?;
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
@@ -35,8 +35,7 @@ async fn main() -> Result<()> {
     disable_raw_mode()?;
     execute!(
         terminal.backend_mut(),
-        LeaveAlternateScreen,
-        DisableMouseCapture
+        LeaveAlternateScreen
     )?;
     terminal.show_cursor()?;
 
@@ -53,7 +52,6 @@ async fn run_app<B: ratatui::backend::Backend>(
     mut rx: mpsc::UnboundedReceiver<ui::AppMessage>,
 ) -> Result<()> {
     loop {
-        terminal.clear()?;
         terminal.draw(|f| ui::draw(f, app))?;
 
         // Check for async results without blocking
